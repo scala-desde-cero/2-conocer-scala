@@ -2,6 +2,9 @@
 1. [Introducción a REPL. Herramienta en modo comando](#schema1)
 2. [Tipos de Datos](#schema2)
 3. [VAR y VAL. Variables](#schema3)
+4. [Crear variable en modo Lazy](#schema4)
+5. [Comentarios](#schema5)
+6. [Operadores](#schema6)
 
 <hr>
 
@@ -79,3 +82,129 @@ var x = 10
 x = 20
 ```
 ![Var](./img/var.png)
+
+<hr>
+
+<a name="schema4"></a>
+
+## 4. Crear variable en modo Lazy
+
+La instanciación en modo `lazy` se refiere a la evaluación diferida de una variable. Una variable lazy se inicializa solo cuando se accede a ella por primera vez. Esto puede ser útil para mejorar el rendimiento en situaciones donde la inicialización de un valor es costosa y puede no ser necesaria en todos los casos.
+
+
+### **Sintaxis y Comportamiento**
+Para declarar una variable lazy, se usa la palabra clave lazy antes de la definición de la variable. Aquí tienes un ejemplo para ilustrar cómo funciona:
+
+```scala
+val x=1/0
+```
+![](./img/lazy_1.png)
+Si la declaramos com `lazy`
+```scala
+lazy val x1=1/0
+```
+![](./img/lazy_2.png)
+
+```scala
+print(x1)
+```
+![](./img/lazy_3.png)
+
+- **Declaración de lazy val**: La variable x1 se declara, pero no se inicializa inmediatamente.
+- **Acceso a x1**: Al intentar acceder a x1 con print(x1), Scala intenta evaluar 1 / 0.
+- **Excepción:** La evaluación de 1 / 0 lanza una ArithmeticException debido a la división por cero.
+- **Manejo de Excepción:** La excepción se captura en el bloque try-catch y se imprime el mensaje de la excepción.
+
+<hr>
+
+<a name="schema5"></a>
+
+## 5. Comentarios
+
+```scala
+// de una sola línea
+```
+```scala
+/*varias
+lineas
+*/
+```
+Comentario para documentación
+```scala
+/*
+*doc1
+*doc2
+*/
+```
+<hr>
+
+<a name="schema6"></a>
+
+## 6. Operadores
+
+**1. Operadores Aritméticos**
+
+Estos operadores se utilizan para realizar operaciones aritméticas básicas.
+
+- Adición: +
+- Sustracción: -
+- Multiplicación: *
+- División: /
+- Módulo: %
+
+**2. Operadores Relacionales**
+
+Estos operadores se utilizan para comparar dos valores.
+
+- Igual a: ==
+- No igual a: !=
+- Mayor que: >
+- Menor que: <
+- Mayor o igual que: >=
+- Menor o igual que: <=
+
+
+**3. Operadores Lógicos**
+
+Estos operadores se utilizan para realizar operaciones lógicas.
+
+- AND Lógico: &&
+- OR Lógico: ||
+- NOT Lógico: !
+
+
+**4. Operadores de Asignación**
+
+Estos operadores se utilizan para asignar valores a variables.
+
+- Asignación simple: =
+- Asignación de suma: +=
+- Asignación de resta: -=
+- Asignación de multiplicación: *=
+- Asignación de división: /=
+- Asignación de módulo: %=
+**5. Operadores Bit a Bit**
+
+Estos operadores se utilizan para realizar operaciones a nivel de bits.
+
+- AND bit a bit: &
+- OR bit a bit: |
+- XOR bit a bit: ^
+- Negación bit a bit: ~
+- Desplazamiento a la izquierda: <<
+- Desplazamiento a la derecha: >>
+- Desplazamiento a la derecha sin signo: >>>
+
+**6. Operadores de Comparación de Identidad**
+
+Estos operadores se utilizan para comprobar la identidad de referencia de los objetos.
+
+- Igual a: eq
+- No igual a: ne
+
+**7. Operadores de Composición de Funciones**
+
+Estos operadores se utilizan para componer funciones.
+
+- Composición hacia adelante: andThen
+- Composición hacia atrás: compose
