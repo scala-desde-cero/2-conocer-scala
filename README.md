@@ -10,6 +10,8 @@
 9. [Rangos](#schema9)
 10. [Inicializar variables por defecto](#schema10)
 11. [Pattern Matching](#schema11)
+12. [Trabajar con Strings](#schema12)
+13. [Trabajar con Números](#schema13)
 
 <hr>
 
@@ -609,4 +611,223 @@ def describeAnimal(animal: Animal): String = animal match {
   case Dog(name) => s"This is a dog named $name"
   case Cat(name) => s"This is a cat named $name"
 }
+```
+
+<hr>
+
+<a name="schema12"></a>
+
+## 12. Trabajar con Strings
+
+### **Declaración de Strings**
+
+En Scala, las strings se pueden declarar de manera sencilla usando comillas dobles:
+
+```scala
+val greeting: String = "Hello, Scala!"
+```
+### **Operaciones Básicas**
+- **Concatenación**
+
+Puedes concatenar strings usando el operador +:
+
+```scala
+val firstName = "John"
+val lastName = "Doe"
+val fullName = firstName + " " + lastName  // "John Doe"
+```
+También puedes usar la interpolación de strings, que es más legible y flexible:
+
+```scala
+val fullName = s"$firstName $lastName"  // "John Doe"
+```
+- **Interpolación de Strings**
+
+  Scala ofrece tres tipos de interpolación de strings:
+
+  * s-interpolator: Permite embedir variables y expresiones directamente en la string.
+
+  ```scala
+  val name = "Alice"
+  val age = 25
+  val greeting = s"Hello, my name is $name and I am $age years old."
+  ```
+  - f-interpolator: Similar a s-interpolator, pero permite formatear la salida.
+
+  ```scala
+  val height = 1.75
+  val formatted = f"$name%s is $height%2.2f meters tall."
+  ```
+  - raw-interpolator: Similar a s-interpolator, pero no interpreta secuencias de escape.
+
+  ```scala
+  val rawString = raw"This is a \n raw string."
+  ```
+### **Métodos Comunes**
+- **Obtener Longitud**
+```scala
+val str = "Hello, Scala!"
+val length = str.length  // 13
+```
+- **Acceder a Caracteres**
+Puedes acceder a un carácter específico usando el índice (los índices comienzan en 0):
+
+```scala
+val char = str(0)  // 'H'
+```
+- **Substrings**
+Para obtener una subcadena:
+
+```scala
+val substr = str.substring(7, 12)  // "Scala"
+```
+- **Conversión de Mayúsculas/Minúsculas**
+```scala
+val upper = str.toUpperCase  // "HELLO, SCALA!"
+val lower = str.toLowerCase  // "hello, scala!"
+```
+- **División**
+Dividir una string en partes:
+
+```scala
+val parts = str.split(",")  // Array("Hello", " Scala!")
+```
+- **Reemplazo**
+Reemplazar partes de una string:
+
+```scala
+val replaced = str.replace("Scala", "World")  // "Hello, World!"
+```
+- **Eliminación de Espacios**
+Eliminar espacios en blanco al principio y al final:
+
+```scala
+val trimmed = str.trim  // "Hello, Scala!"
+```
+### **Comparación de Strings**
+Comparar strings en Scala:
+
+```scala
+val str1 = "Scala"
+val str2 = "scala"
+
+val isEqual = str1 == str2  // false
+val isEqualIgnoreCase = str1.equalsIgnoreCase(str2)  // true
+```
+### **Strings Multilínea**
+
+Scala permite definir strings multilínea usando triple comillas:
+
+```scala
+val multiline = """This is a
+                  |multiline
+                  |string.""".stripMargin
+```
+### **Uso Avanzado**
+- **Patrones y Expresiones Regulares**
+Puedes usar expresiones regulares para coincidencia de patrones en strings:
+
+```scala
+val pattern = "Scala".r
+val str = "I love Scala programming"
+
+pattern.findFirstIn(str) match {
+  case Some(_) => println("Found")
+  case None => println("Not Found")
+}
+```
+- **Formateo de Strings**
+Formatear strings de manera similar a printf en otros lenguajes:
+
+```scala
+val name = "Alice"
+val age = 25
+val formatted = "%s is %d years old".format(name, age)  // "Alice is 25 years old"
+```
+<hr>
+
+<a name="schema13"></a>
+
+## 13. Trabajar con Números
+
+### **Tipos Numéricos en Scala**
+Scala tiene varios tipos de datos numéricos que se corresponden con los tipos de datos primitivos de Java:
+
+- Byte: Entero de 8 bits con signo.
+- Short: Entero de 16 bits con signo.
+- Int: Entero de 32 bits con signo.
+- Long: Entero de 64 bits con signo.
+- Float: Número de coma flotante de 32 bits.
+- Double: Número de coma flotante de 64 bits.
+- Char: Caracter Unicode de 16 bits.
+### **Declaración de Variables Numéricas**
+Puedes declarar variables numéricas de manera sencilla:
+
+```scala
+val intNum: Int = 42
+val doubleNum: Double = 3.14
+val longNum: Long = 123456789L
+val floatNum: Float = 2.5f
+```
+### **Operaciones Aritméticas**
+Scala soporta las operaciones aritméticas básicas:
+
+```scala
+val a = 10
+val b = 20
+
+val sum = a + b        // 30
+val diff = a - b       // -10
+val product = a * b    // 200
+val quotient = b / a   // 2
+val remainder = b % a  // 0
+```
+### **Métodos Numéricos**
+Scala proporciona varios métodos útiles para trabajar con números:
+
+- **Conversión de Tipo**
+Puedes convertir entre tipos numéricos:
+
+```scala
+val x: Int = 10
+val y: Double = x.toDouble  // 10.0
+val z: String = x.toString  // "10"
+```
+- **Comparaciones**
+Puedes comparar números utilizando los operadores estándar:
+
+```scala
+val x = 10
+val y = 20
+
+val isEqual = x == y       // false
+val isNotEqual = x != y    // true
+val isGreater = x > y      // false
+val isLess = x < y         // true
+val isGreaterOrEqual = x >= y  // false
+val isLessOrEqual = x <= y  // true
+```
+- **Métodos Matemáticos**
+Scala también tiene métodos matemáticos más avanzados a través del objeto scala.math:
+
+```scala
+import scala.math._
+
+val piValue = Pi               // 3.141592653589793
+val sqrtValue = sqrt(16)       // 4.0
+val powValue = pow(2, 3)       // 8.0
+val absValue = abs(-5)         // 5
+val maxValue = max(10, 20)     // 20
+val minValue = min(10, 20)     // 10
+```
+### **Números Aleatorios**
+Puedes generar números aleatorios usando scala.util.Random:
+
+```scala
+import scala.util.Random
+
+val random = new Random()
+val randomInt = random.nextInt()      // Un número entero aleatorio
+val randomIntBounded = random.nextInt(100)  // Un número entero aleatorio entre 0 y 99
+val randomDouble = random.nextDouble()  // Un número doble aleatorio entre 0.0 y 1.0
 ```
