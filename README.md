@@ -5,6 +5,11 @@
 4. [Crear variable en modo Lazy](#schema4)
 5. [Comentarios](#schema5)
 6. [Operadores](#schema6)
+7. [Condiciones. Comando IF](#schema7)
+8. [Bucles](#schema8)
+9. [Rangos](#schema9)
+10. [Inicializar variables por defecto](#schema10)
+11. [Pattern Matching](#schema11)
 
 <hr>
 
@@ -208,3 +213,400 @@ Estos operadores se utilizan para componer funciones.
 
 - Composición hacia adelante: andThen
 - Composición hacia atrás: compose
+
+<hr>
+
+<a name="schema7"></a>
+
+## 7. Condiciones. Comando IF
+
+
+**Sintaxis Básica del if**
+
+La estructura básica de un if en Scala es:
+
+```scala
+if (condición) {
+  // bloque de código si la condición es verdadera
+}
+```
+
+**if-else**
+
+El if puede ser seguido por un bloque else para manejar el caso en el que la condición es falsa.
+
+```scala
+if (x > 0) {
+  println("x es positivo")
+} else {
+  println("x no es positivo")
+}
+```
+
+**if-else if-else**
+
+Para manejar múltiples condiciones, puedes usar else if:
+
+```scala
+if (x > 0) {
+  println("x es positivo")
+} else if (x < 0) {
+  println("x es negativo")
+} else {
+  println("x es cero")
+}
+```
+
+**Expresiones if**
+
+En Scala, las condiciones if son expresiones, lo que significa que devuelven un valor. Puedes asignar el resultado de una condición if a una variable.
+
+```scala
+val y = if (x > 0) 1 else -1
+println(y) // y será 1 si x es mayor que 0, de lo contrario, -1
+```
+
+**Condiciones if Anidadas**
+
+Puedes anidar condiciones if dentro de otras condiciones if:
+
+```scala
+if (x > 0) {
+  if (x < 10) {
+    println("x es un número positivo de un solo dígito")
+  } else {
+    println("x es un número positivo de dos o más dígitos")
+  }
+} else {
+  println("x no es positivo")
+}
+```
+**Uso de Expresiones Booleanas**
+
+Las condiciones en un if deben ser expresiones booleanas (es decir, que devuelvan true o false):
+
+```scala
+val isEven = (x % 2 == 0)
+
+if (isEven) {
+  println("x es par")
+} else {
+  println("x es impar")
+}
+```
+<hr>
+
+<a name="schema8"></a>
+
+## 8. Bucles
+
+
+**Bucle while**
+
+El bucle while ejecuta un bloque de código mientras una condición sea verdadera. La condición se evalúa antes de cada iteración.
+
+```scala
+
+var i = 0
+while (i < 5) {
+  println(i)
+  i += 1
+}
+```
+**Bucle do-while**
+
+El bucle do-while es similar a while, pero garantiza que el bloque de código se ejecute al menos una vez, ya que la condición se evalúa después de cada iteración.
+
+```scala
+var j = 0
+do {
+  println(j)
+  j += 1
+} while (j < 5)
+```
+**Bucle for**
+
+El bucle for en Scala es muy poderoso y puede usarse de varias maneras, incluyendo rangos, colecciones, y con comprensiones (for comprehensions).
+
+- Iteración sobre un rango
+```scala
+for (i <- 1 to 5) {
+  println(i)
+}
+```
+- Iteración sobre una colección
+```scala
+val nums = List(1, 2, 3, 4, 5)
+for (n <- nums) {
+  println(n)
+}
+```
+- Comprehensions
+
+Las comprehensions de for son muy potentes y permiten incluir condiciones y generar nuevas colecciones.
+
+```scala
+val nums = List(1, 2, 3, 4, 5)
+val evenNums = for {
+  n <- nums
+  if n % 2 == 0
+} yield n
+
+println(evenNums) // List(2, 4)
+```
+
+<hr>
+
+<a name="schema9"></a>
+
+## 9. Rangos
+
+**Creación de Rangos**
+
+Puedes crear rangos utilizando el operador to o until.
+
+- to: Incluye el valor final.
+- until: Excluye el valor final.
+
+```scala
+val range1 = 1 to 5    // Incluye 1, 2, 3, 4, 5
+val range2 = 1 until 5 // Incluye 1, 2, 3, 4 (no incluye 5)
+```
+
+**Especificar el Paso**
+
+Puedes especificar un paso diferente al valor predeterminado de 1 usando by.
+
+```scala
+val range3 = 1 to 10 by 2  // Incluye 1, 3, 5, 7, 9
+val range4 = 10 to 1 by -1 // Incluye 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+```
+
+**Rangos con Bucles for**
+
+Los rangos son comúnmente utilizados en bucles for para iterar sobre secuencias de números.
+
+```scala
+for (i <- 1 to 5) {
+  println(i)  // Imprime 1, 2, 3, 4, 5
+}
+```
+```scala
+for (i <- 1 until 5) {
+  println(i)  // Imprime 1, 2, 3, 4
+}
+```
+
+**Operaciones con Rangos**
+
+Los rangos en Scala soportan varias operaciones útiles que se pueden realizar sobre ellos como cualquier otra colección.
+
+- Convertir un rango a una lista:
+```scala
+val rangeList = (1 to 5).toList  // List(1, 2, 3, 4, 5)
+```
+- Filtrar elementos en un rango:
+```scala
+val evenNumbers = (1 to 10).filter(_ % 2 == 0)  // Vector(2, 4, 6, 8, 10)
+```
+- Mapear sobre un rango:
+```scala
+val squaredNumbers = (1 to 5).map(x => x * x)  // Vector(1, 4, 9, 16, 25)
+```
+
+
+<hr>
+
+<a name="schema10"></a>
+
+## 10. Inicializar variables por defecto
+
+Puedes inicializar variables directamente con valores por defecto al declararlas.
+**Usar var para Variables Inmutables**
+```scala
+val intVar: Int = 0
+val doubleVar: Double = 0.0
+val stringVar: String = ""
+val boolVar: Boolean = false
+val listVar: List[Int] = List()
+```
+
+
+**Usar var para Variables Mutables**
+
+Si necesitas una variable que pueda cambiar de valor, usa var en lugar de val. Aún así, puedes proporcionar un valor por defecto.
+
+```scala
+var mutableIntVar: Int = 0
+var mutableStringVar: String = ""
+```
+**Valores por Defecto en Clases**
+
+En las clases, puedes proporcionar valores por defecto para los parámetros del constructor. Esto es útil para evitar la necesidad de múltiples constructores.
+
+```scala
+class Person(val name: String = "John Doe", val age: Int = 30)
+
+val defaultPerson = new Person()      // Usará los valores por defecto
+val customPerson = new Person("Alice", 25)  // Usará los valores proporcionados
+```
+**Valores por Defecto en Métodos**
+
+También puedes proporcionar valores por defecto para los parámetros de los métodos.
+
+```scala
+def greet(name: String = "Guest"): Unit = {
+  println(s"Hello, $name!")
+}
+
+greet()          // Usará el valor por defecto "Guest"
+greet("Alice")   // Usará el valor proporcionado "Alice"
+```
+
+**Usar Option para Valores que Pueden ser Nulos**
+
+Para manejar valores que pueden ser nulos o no estar presentes, es una buena práctica usar Option en lugar de valores nulos (null).
+
+```scala
+val maybeInt: Option[Int] = None  // Representa un valor opcional que puede estar presente o no
+
+// Inicializando con un valor
+val someInt: Option[Int] = Some(42)
+```
+
+<hr>
+
+<a name="schema11"></a>
+
+## 11. Pattern Matching 
+
+
+El `Pattern Matching` (o coincidencia de patrones) es una característica poderosa y expresiva de Scala que permite comprobar un valor contra un patrón y, en función de ese patrón, ejecutar un bloque de código.
+
+**Conceptos Básicos**
+
+La coincidencia de patrones se usa principalmente con la construcción match en Scala. Aquí tienes un ejemplo básico:
+
+```scala
+val x: Int = 10
+
+x match {
+  case 1 => println("One")
+  case 2 => println("Two")
+  case _ => println("Other number")
+}
+```
+En este ejemplo, x se compara con los patrones 1, 2, y un comodín _ (que coincide con cualquier otro valor). Dependiendo del valor de x, se ejecutará uno de los bloques de código correspondientes.
+
+
+**Patrones Comunes**
+- Literales: Coinciden con valores específicos.
+
+```scala
+val x: Int = 10
+
+x match {
+  case 10 => println("Ten")
+  case _  => println("Not Ten")
+}
+```
+- Comodín _: Coincide con cualquier valor y generalmente se usa como un caso predeterminado.
+
+```scala
+val x: Int = 10
+
+x match {
+  case 1 => println("One")
+  case _ => println("Other number")
+}
+```
+- Variables: Coinciden con cualquier valor y lo asignan a una variable.
+
+```scala
+val x: Int = 10
+
+x match {
+  case y => println(s"Got $y")
+}
+```
+- Constructor de clases: Coincide con la estructura de un objeto.
+
+```scala
+case class Person(name: String, age: Int)
+
+val person = Person("Alice", 25)
+
+person match {
+  case Person(name, age) => println(s"Name: $name, Age: $age")
+}
+```
+- Listas: Coincide con estructuras específicas de listas.
+
+```scala
+val list = List(1, 2, 3)
+
+list match {
+  case List(1, 2, 3) => println("List is 1, 2, 3")
+  case _ => println("Other list")
+}
+```
+- Tipos: Coincide con tipos específicos.
+
+```scala
+def describe(x: Any): String = x match {
+  case i: Int => "an integer"
+  case s: String => "a string"
+  case _ => "something else"
+}
+
+println(describe(42))      // Output: an integer
+println(describe("hello")) // Output: a string
+println(describe(2.0))     // Output: something else
+```
+
+
+### **Uso Avanzado**
+**Guardas**
+
+Puedes agregar condiciones adicionales a un patrón usando guardas (if).
+
+``scala
+val x: Int = 10
+
+x match {
+  case n if n % 2 == 0 => println(s"$n is even")
+  case n if n % 2 != 0 => println(s"$n is odd")
+}
+```
+**Patrones Anidados**
+
+Puedes tener patrones anidados para coincidir con estructuras de datos más complejas.
+
+```scala
+case class Address(city: String, zip: String)
+case class Person(name: String, address: Address)
+
+val person = Person("Alice", Address("Wonderland", "12345"))
+
+person match {
+  case Person(name, Address(city, _)) => println(s"$name lives in $city")
+}
+```
+**Scala 3 Mejoras**
+
+Scala 3 trae mejoras y nuevas características a Pattern Matching, manteniendo la compatibilidad con la sintaxis y funcionalidad de Scala 2.
+
+- Patrones de Tipos Sellados
+
+Scala 3 introduce mejores verificaciones exhaustivas para tipos sellados, lo que hace que el compilador sea más inteligente en detectar patrones no cubiertos.
+
+```scala
+sealed trait Animal
+case class Dog(name: String) extends Animal
+case class Cat(name: String) extends Animal
+
+def describeAnimal(animal: Animal): String = animal match {
+  case Dog(name) => s"This is a dog named $name"
+  case Cat(name) => s"This is a cat named $name"
+}
+```
